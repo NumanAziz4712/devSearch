@@ -34,8 +34,12 @@ def createProfile(sender, instance, created, **kwargs):
 
 # delete the user
 def deleteUser(sender, instance, **kwargs):
-    user = instance.user
-    user.delete()
+    # now if we delete the user, the wrror wont occure.
+    try:
+        user = instance.user
+        user.delete()
+    except:
+        pass
 
 # update signals
 
