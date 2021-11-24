@@ -77,9 +77,15 @@ def updateProject(request, pk):
     form = projectForm(instance=project)
 
     if request.method == 'POST':
+        tags = request.POST.get('newtags').replace(',', ' ').split()
         form = projectForm(request.POST,request.FILES, instance=project)
-        if form.is_valid:
-            form.save()
+
+        
+        if form.is_valid():
+            project = form.save()
+            for tag in tags:
+                tag, created = Tag.objects.get_or_create(name=tag)
+                project.tags.add(tag)
             return redirect('account')
     context = {
         'form': form,
