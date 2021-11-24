@@ -58,11 +58,16 @@ def createProject(request):
     form = projectForm()
 
     if request.method == 'POST':
+        tags = request.POST.get('newtags').replace(',', ' ').split()
         form = projectForm(request.POST, request.FILES)
         if form.is_valid:
             project = form.save(commit=False)
             project.owner = profile
             project.save()
+
+            for tag in tags:
+                tag, created = Tag.objects.get_or_create(name=tag)
+                project.tags.add(tag)
             return redirect('account')
     context = {
         'form': form,
@@ -86,6 +91,7 @@ def updateProject(request, pk):
             for tag in tags:
                 tag, created = Tag.objects.get_or_create(name=tag)
                 project.tags.add(tag)
+            
             return redirect('account')
     context = {
         'form': form,
