@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from api import serializers
 from api.serializers import ProjectSerializer
-from projects.models import Project, Review
+from projects.models import Project, Review, Tag
 # Here in the list we can specify the methods for the view i-e. GET POST PUT
 @api_view(['GET'])
 def getRoutes(request):
@@ -56,3 +56,15 @@ def ProjectVote(request, pk):
 
     serializer = ProjectSerializer(project, many=False)
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def removeTag(request):
+    tagId = request.data['tag']
+    projectId = request.data['project']
+
+    project = Project.objects.get(id=projectId)
+    tag = Tag.objects.get(id=tagId)
+
+    project.tags.remove(tag)
+    
+    return Response('tag was delete')
