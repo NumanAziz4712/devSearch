@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v1ftt=g^uq5y69!s33*^d67jjk*!wra#6x+beaa=mzqh-wb+wd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost','127.0.0.1', 'numanaziz.herokuapp.com']
 
@@ -150,5 +150,5 @@ EMAIL_HOST_USER = 'numanaziz59@gmail.com'
 EMAIL_HOST_PASSWORD = 'pmfmozfiyghpyqcj'
 
 # specefiying the current work directory, if we are live that will be '/app
-if os.getcwd() == '/app':
-    DEBUG = False
+# if os.getcwd() == '/app':
+#     DEBUG = False
