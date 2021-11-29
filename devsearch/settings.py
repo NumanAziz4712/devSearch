@@ -18,6 +18,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'numanaziz.herokuapp.com']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -152,3 +153,4 @@ EMAIL_HOST_PASSWORD = 'pmfmozfiyghpyqcj'
 # specefiying the current work directory, if we are live that will be '/app
 if os.getcwd() == '/app':
     DEBUG = False
+    ALLOWED_HOSTS = ['numanaziz.herokuapp.com']
