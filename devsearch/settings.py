@@ -151,5 +151,5 @@ EMAIL_HOST_USER = 'numanaziz59@gmail.com'
 EMAIL_HOST_PASSWORD = 'pmfmozfiyghpyqcj'
 
 # specefiying the current work directory, if we are live that will be '/app
-if os.getcwd() == '/app':
+if os.getcwd() == 'app':
     DEBUG = False
