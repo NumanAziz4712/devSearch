@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-v1ftt=g^uq5y69!s33*^d67jjk*!wra#6x+beaa=mzqh-wb+wd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1', 'numanaziz.herokuapp.com']
 
 
 # Application definition
@@ -42,12 +42,16 @@ REST_FRAMEWORK = {
 }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'devsearch.urls'
@@ -76,8 +80,12 @@ WSGI_APPLICATION = 'devsearch.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'numi2174',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -119,6 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = '/images/'
 
 STATICFILES_DIRS = [
@@ -139,3 +148,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'numanaziz59@gmail.com'
 EMAIL_HOST_PASSWORD = 'pmfmozfiyghpyqcj'
+
+# specefiying the current work directory, if we are live that will be '/app
+if os.getcwd() == '/app':
+    DEBUG = False
